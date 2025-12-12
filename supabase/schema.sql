@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS products (
     is_featured BOOLEAN DEFAULT FALSE,
     is_active BOOLEAN DEFAULT TRUE,
     thumbnail_url TEXT,
+    benefits TEXT[],
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

@@ -69,13 +69,13 @@ export default async function Home() {
                 <span className="text-emerald-600 font-semibold tracking-wide uppercase text-sm">Katalog Pilihan</span>
                 <h2 className="text-4xl font-bold text-stone-900 dark:text-stone-100 mt-2">Produk Terlaris Minggu Ini</h2>
               </div>
-              <Link href="#" className="hidden sm:inline-flex items-center px-6 py-3 rounded-full bg-white border border-stone-200 text-stone-700 font-medium hover:bg-stone-50 hover:border-emerald-500 transition-colors shadow-sm dark:bg-stone-800 dark:border-stone-700 dark:text-stone-300">
+              <Link href="/products" className="hidden sm:inline-flex items-center px-6 py-3 rounded-full bg-white border border-stone-200 text-stone-700 font-medium hover:bg-stone-50 hover:border-emerald-500 transition-colors shadow-sm dark:bg-stone-800 dark:border-stone-700 dark:text-stone-300">
                 Lihat Semua Produk <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
            </div>
 
            {products && products.length > 0 ? (
-             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
                {products.map((product) => (
                  <ProductCard key={product.id} product={product} />
                ))}
@@ -87,7 +87,7 @@ export default async function Home() {
            )}
 
            <div className="mt-12 text-center sm:hidden">
-              <Link href="#" className="inline-flex items-center font-medium text-emerald-700 hover:text-emerald-800 dark:text-emerald-500">
+              <Link href="/products" className="inline-flex items-center font-medium text-emerald-700 hover:text-emerald-800 dark:text-emerald-500">
                 Lihat Semua <ChevronRight className="ml-1 w-4 h-4" />
               </Link>
            </div>

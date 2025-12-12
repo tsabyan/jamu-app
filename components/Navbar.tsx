@@ -4,9 +4,11 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X, ShoppingBag } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-stone-100 dark:bg-stone-900/80 dark:border-stone-800">
@@ -24,7 +26,7 @@ export default function Navbar() {
             <Link href="/" className="text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 font-medium transition-colors">
               Home
             </Link>
-            <Link href="#products" className="text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 font-medium transition-colors">
+            <Link href="/products" className="text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 font-medium transition-colors">
               Produk
             </Link>
             <Link href="#" className="text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 font-medium transition-colors">
@@ -35,11 +37,14 @@ export default function Navbar() {
             </Link>
 
             {/* Cart Icon */}
-            <button className="p-2 text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 transition-colors relative">
+            <Link href="/checkout" className="p-2 text-stone-600 hover:text-emerald-700 dark:text-stone-300 dark:hover:text-emerald-400 transition-colors relative">
               <ShoppingBag className="w-5 h-5" />
-              {/* Badge placeholder */}
-              {/* <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-emerald-600 rounded-full">0</span> */}
-            </button>
+              {totalItems > 0 && (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-emerald-600 rounded-full">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -66,7 +71,7 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="#products"
+              href="/products"
               className="block px-3 py-2 rounded-md text-base font-medium text-stone-700 hover:text-emerald-700 hover:bg-stone-50 dark:text-stone-200 dark:hover:bg-stone-800"
               onClick={() => setIsOpen(false)}
             >
@@ -86,10 +91,21 @@ export default function Navbar() {
             >
               Kontak
             </Link>
-             <button className="flex w-full items-center px-3 py-2 text-base font-medium text-stone-700 hover:text-emerald-700 hover:bg-stone-50 dark:text-stone-200 dark:hover:bg-stone-800">
-              <ShoppingBag className="w-5 h-5 mr-2" />
-              Keranjang
-            </button>
+            <Link
+              href="/checkout"
+              className="flex w-full items-center justify-between px-3 py-2 text-base font-medium text-stone-700 hover:text-emerald-700 hover:bg-stone-50 dark:text-stone-200 dark:hover:bg-stone-800"
+              onClick={() => setIsOpen(false)}
+            >
+              <div className="flex items-center">
+                <ShoppingBag className="w-5 h-5 mr-2" />
+                Keranjang
+              </div>
+              {totalItems > 0 && (
+                 <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
+                  {totalItems} Item
+                 </span>
+              )}
+            </Link>
           </div>
         </div>
       )}
